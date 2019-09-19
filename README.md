@@ -1,1 +1,0 @@
-# querijnsharp.github.io

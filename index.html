@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    #location {
+        background-image: url('css/searchicon.png');
+        background-position: 10px 12px;
+        background-repeat: no-repeat;
+        width: 100%;
+        font-size: 16px;
+        padding: 12px 20px 12px 40px;
+        border: 1px solid #ddd;
+        margin-bottom: 12px;
+    }
+    #hatchTime, #startTime, #result
+    {
+        width: 100%;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        margin-bottom: 12px;
+        padding: 12px;
+    }
+
+    label {
+        border: 1px solid #ddd;
+        margin-top: -1px;
+        /* Prevent double borders */
+        background-color: #f6f6f6;
+        padding: 12px;
+        text-decoration: none;
+        font-size: 18px;
+        color: black;
+        display: block
+    }
+
+    button
+    {
+        padding: 12px;
+        width: 100%;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        margin-bottom: 12px;
+    }
+</style>
+
+<body>
+    <div>
+        <label for="locations">Location: </label>
+        <input list="locations" id="location">
+        <datalist id="locations">
+        </datalist>
+    </div>
+    </div>
+    <label for="hatchTime">Egg Hatch Time: </label>
+    <input type="time" id="hatchTime" min="04:00" max="00:00">
+    </div>
+    <div>
+        <label for="number">Minutes to start after egg hatch: </label>
+        <input type="number" id="startTime" value="35" max="1000" />
+    </div>
+    <div>
+        <button id="doMagic" onclick="doMagic()">Do Magic</button>
+    </div>
+    <div>
+        <label for="result">Result: </label>
+        <textarea id="result" rows="2"></textarea>
+    </div>
+    <div>
+        <button id="copy" onclick="copy()">Copy to Clipboard</button>
+    </div>
+</body>
+
+</html>
+
+<script>
+    var d = new Date(),
+        h = d.getHours(),
+        m = d.getMinutes();
+    if (h < 10) h = '0' + h;
+    if (m < 10) m = '0' + m;
+    document.getElementById("hatchTime").value = `${h}:${m}`;;
+</script>
+
+<script>
+    function copy() {
+        document.getElementById("result").select();
+        document.execCommand('copy');
+    }
+    function doMagic() {
+        if (document.getElementById("startTime").value == "" || document.getElementById("hatchTime").value == "") {
+            return;
+        }
+        else if (document.getElementById("location").value == "")
+        {
+            alert("No location entered");
+            return;
+        }
+        var hatchTime = document.getElementById("hatchTime").value;
+        var hatchDate = new Date(`0`);
+        hatchDate.setHours(parseInt(hatchTime.split(":")[0]));
+        hatchDate.setMinutes(parseInt(hatchTime.split(":")[1]));
+        var msg = Construct(document.getElementById("location").value, hatchDate, parseInt(document.getElementById("startTime").value));
+        if (!msg)
+        {
+            alert("Invalid location");
+            return;
+        }
+        document.getElementById("result").value = msg
+        document.getElementById("result").style.height = document.getElementById("result").scrollHeight + "px";
+    }
+
+    function checkTime(i) {
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
+
+    function Construct(location, raidAvailableTime, addMin) {
+        if (RaidLocations.every(s => !s.name.toLowerCase().includes(location.toLowerCase()) && !s.location.toLowerCase().includes(location.toLowerCase())))
+            return false;
+        var targetLocation = RaidLocations.find(s => s.name.toLowerCase().includes(location.toLowerCase()) || s.location.toLowerCase().includes(location.toLowerCase()));
+        var endTime = new Date(raidAvailableTime.getTime() + 45 * 60000);
+        var startTime = new Date(raidAvailableTime.getTime() + addMin * 60000);
+        var message = `*${CurrentRaidBoss}* _${targetLocation.name}_${targetLocation.exraid == true ? " *EX RAID LOCATIE*" : ""}
+*Locatie* ${targetLocation.location}
+*Raidboss Available* ${checkTime(raidAvailableTime.getHours())}.${checkTime(raidAvailableTime.getMinutes())} - ${checkTime(endTime.getHours())}.${checkTime(endTime.getMinutes())}
+*Start* ${checkTime(startTime.getHours())}.${checkTime(startTime.getMinutes())}
+*Voor Deelname* ${targetLocation.reaction}
+*Deelnemers*`;
+        return message;
+    }
+</script>
+
+<script>
+    //Set raidlocations
+    var RaidLocations = [
+        {
+            name: "Langeleenweg Tunnel Èiè mural",
+            location: "Fietsers tunnel bij de Gamma (Bossenburg)",
+            reaction: "🛹",
+            exraid: false
+        },
+        {
+            name: "Skatebaan Bossenburgh",
+            location: "Bossenburgh, bij CSW en Scheldemond",
+            reaction: "🛣",
+            exraid: true
+        },
+        {
+            name: "Graffiti skatebaan Bossenburgh",
+            location: "Bossenburgh, bij CSW en Scheldemond",
+            reaction: "👩🏻‍🎨",
+            exraid: false
+        },
+        {
+            name: "Apostolische gemeenschap",
+            location: "Lammerenburg/Rosenburg",
+            reaction: "🏚",
+            exraid: false
+        },
+        {
+            name: "Speel waar het kan en mag",
+            location: "Bossenburgh",
+            reaction: "🎮",
+            exraid: false
+        },
+        {
+            name: "Blijdier Saar",
+            location: "Nieuw Bonedijkelaan ",
+            reaction: "⭕",
+            exraid: false
+        },
+        {
+            name: "Buizen in het gras",
+            location: "Rosenburglaan",
+            reaction: "🦗",
+            exraid: false
+        },
+        {
+            name: "Playground Lammerenburg",
+            location: "Strandwal",
+            reaction: "▶",
+            exraid: false
+        },
+        {
+            name: "Mural House",
+            location: "Kanariesprenk/Papegaaienburg",
+            reaction: "🏡",
+            exraid: false
+        },
+        {
+            name: "Metal Papegaaienburg",
+            location: "Kanariesprenk",
+            reaction: "🤖",
+            exraid: false
+        },
+        {
+            name: "Weyevliet Mural",
+            location: "Weyevlietpad",
+            reaction: "🐝",
+            exraid: false
+        },
+        {
+            name: "One Wish and a very big Fish",
+            location: "President Rooseveltlaan",
+            reaction: "🐠",
+            exraid: true
+        },
+        {
+            name: "Scheve blokken",
+            location: "Van Dycklaan",
+            reaction: "👒",
+            exraid: true
+        },
+        {
+            name: "Straat Mozaïek",
+            location: "Gravestraat",
+            reaction: "👩🏻‍🎨",
+            exraid: false
+        },
+        {
+            name: "Vuurtoren/Michieltje",
+            location: "Boule",
+            reaction: "⚓",
+            exraid: false
+        },
+        {
+            name: "700 Jaar Vlissingen/Timmerfabriek",
+            location: "Koningsweg",
+            reaction: "💕",
+            exraid: false
+        },
+        {
+            name: "Graffiti",
+            location: "President Rooseveltlaan",
+            reaction: "👩🏻‍🎨",
+            exraid: false
+        },
+        {
+            name: "Balans/Ter Reede",
+            location: "Koudekerkseweg",
+            reaction: "👵🏻",
+            exraid: false
+        },
+        {
+            name: "Nieuw Apostolische Kerk",
+            location: "West Souburg",
+            reaction: "⛪",
+            exraid: false
+        },
+        {
+            name: "Kruis Kerk de Schaapskooi ",
+            location: "Winkelcentrum Papegaaienburg",
+            reaction: "🐑",
+            exraid: false
+        },
+        {
+            name: "Souburg City Windwill",
+            location: "Kanaalstraat",
+            reaction: "🐶",
+            exraid: false
+        },
+        {
+            name: "Flying Dutchman",
+            location: "Stadhuisplein",
+            reaction: "🇳🇱",
+            exraid: false
+        },
+        {
+            name: "Badeend Mozaïek",
+            location: "Nieuw Bonedijkelaan",
+            reaction: "❌",
+            exraid: true
+        },
+        {
+            name: "Papegaai in Glas",
+            location: "Papegaaienburg",
+            reaction: "🦜",
+            exraid: false
+        },
+        {
+            name: "Speelplastiek",
+            location: "Aletta Jacobslaan",
+            reaction: "🐝", //DUPLICATE
+            exraid: true
+        },
+        {
+            name: "Kleurige Tegels 2",
+            location: "Adriaen Coortelaan",
+            reaction: "🥳",
+            exraid: false
+        },
+        {
+            name: "Standbeelden Bambini",
+            location: "Bambini",
+            reaction: "🌴",
+            exraid: false
+        },
+        {
+            name: "Fire eyes",
+            location: "Cirkel Paauwenburg",
+            reaction: "🙃", //🤩
+            exraid: false
+        },
+        {
+            name: "Statue Frans Naerebout",
+            location: "Boule",
+            reaction: "👩🏻‍🎨", //DUPLICATE
+            exraid: false
+        },
+        {
+            name: "Adventkerk",
+            location: "Kerklaan, West-Souburg",
+            reaction: "",
+            exraid: false
+        },
+        {
+            name: "Familie Pilaar",
+            location: "Groen van prinksterenlaan",
+            reaction: "🤯",
+            exraid: true
+        },
+        {
+            name: "Speelplaats het Fort",
+            location: "Pieter Poststraat",
+            reaction: "🖤",
+            exraid: false
+        },
+        {
+            name: "Las Vegas",
+            location: "Bloemenlaan/Singel",
+            reaction: "💋",
+            exraid: false
+        },
+        {
+            name: "Boeiend/Bioscoop",
+            location: "Spuikomweg",
+            reaction: "🎞",
+            exraid: false
+        },
+        {
+            name: "Fysiotherapie",
+            location: "Burgemeester van Woelderenlaan",
+            reaction: "🧘🏻",
+            exraid: false
+        },
+        {
+            name: "The Watertower",
+            location: "Badhuisstraat",
+            reaction: "💧",
+            exraid: false
+        },
+    ];
+    var CurrentRaidBoss = "Mewtwo";
+</script>
+
+
+<script>
+    for (var i of RaidLocations) {
+        var option = document.createElement('option');
+        option.value = i.name;
+        document.getElementById('locations').appendChild(option);
+    }
+</script>

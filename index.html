@@ -2,7 +2,7 @@
 <html>
 
 <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <style>
     * {
@@ -19,19 +19,16 @@
         border: 1px solid #ddd;
         margin-bottom: 12px;
     }
-    #hatchTime, #startTime, #result
-    {
+
+    #hatchTime,
+    #startTime,
+    #result {
         width: 100%;
         font-size: 16px;
         border: 1px solid #ddd;
         margin-bottom: 12px;
         padding: 12px;
     }
-
-    /*#result
-    {
-        pointer-events: none;
-    }*/
 
     label {
         border: 1px solid #ddd;
@@ -45,8 +42,7 @@
         display: block
     }
 
-    button
-    {
+    button {
         padding: 12px;
         width: 100%;
         font-size: 16px;
@@ -75,7 +71,7 @@
     </div>
     <div>
         <label for="result">Result: </label>
-        <textarea id="result" rows="2" readonly></textarea>
+        <textarea id="result" rows="2" readonly contenteditable="false"></textarea>
     </div>
     <div>
         <button id="copy" onclick="copy()">Copy to Clipboard</button>
@@ -95,15 +91,47 @@
 
 <script>
     function copy() {
-        document.getElementById("result").select();
+        var el = document.getElementById("result");
+        // resolve the element
+        el = (typeof el === 'string') ? document.querySelector(el) : el;
+
+        // handle iOS as a special case
+        if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
+
+            // save current contentEditable/readOnly status
+            var editable = el.contentEditable;
+            var readOnly = el.readOnly;
+
+            // convert to editable with readonly to stop iOS keyboard opening
+            el.contentEditable = true;
+            el.readOnly = true;
+
+            // create a selectable range
+            var range = document.createRange();
+            range.selectNodeContents(el);
+
+            // select the range
+            var selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            el.setSelectionRange(0, 999999);
+
+            // restore contentEditable/readOnly to original state
+            el.contentEditable = editable;
+            el.readOnly = readOnly;
+        }
+        else {
+            el.select();
+        }
+
+        // execute copy command
         document.execCommand('copy');
     }
     function doMagic() {
         if (document.getElementById("startTime").value == "" || document.getElementById("hatchTime").value == "") {
             return;
         }
-        else if (document.getElementById("location").value == "")
-        {
+        else if (document.getElementById("location").value == "") {
             alert("No location entered");
             return;
         }
@@ -112,8 +140,7 @@
         hatchDate.setHours(parseInt(hatchTime.split(":")[0]));
         hatchDate.setMinutes(parseInt(hatchTime.split(":")[1]));
         var msg = Construct(document.getElementById("location").value, hatchDate, parseInt(document.getElementById("startTime").value));
-        if (!msg)
-        {
+        if (!msg) {
             alert("Invalid location");
             return;
         }

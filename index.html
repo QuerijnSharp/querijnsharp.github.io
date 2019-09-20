@@ -76,6 +76,9 @@
     <div>
         <button id="copy" onclick="copy()">Copy to Clipboard</button>
     </div>
+    <div>
+        <button id="share" onclick="share()">Share</button>
+    </div>
 </body>
 
 </html>
@@ -90,6 +93,13 @@
 </script>
 
 <script>
+
+    function share()
+    {
+        if (document.getElementById("result").value != "")
+        location.href="whatsapp://send?text="+encodeURIComponent(document.getElementById("result").value);
+    }
+
     function reset()
     {
         document.getElementById("location").value = "";

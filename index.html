@@ -54,7 +54,7 @@
 <body>
     <div>
         <label for="locations">Location: </label>
-        <input list="locations" id="location">
+        <input list="locations" id="location" onclick="reset()">
         <datalist id="locations">
         </datalist>
     </div>
@@ -67,7 +67,7 @@
         <input type="number" id="startTime" value="35" max="1000" />
     </div>
     <div>
-        <button id="doMagic" onclick="doMagic()">Do Magic</button>
+        <button id="CreateMessage" onclick="CreateMessage()">Do Magic</button>
     </div>
     <div>
         <label for="result">Result: </label>
@@ -90,6 +90,11 @@
 </script>
 
 <script>
+    function reset()
+    {
+        document.getElementById("location").value = "";
+    }
+
     function copy() {
         var el = document.getElementById("result");
         // resolve the element
@@ -127,7 +132,7 @@
         // execute copy command
         document.execCommand('copy');
     }
-    function doMagic() {
+    function CreateMessage() {
         if (document.getElementById("startTime").value == "" || document.getElementById("hatchTime").value == "") {
             return;
         }
@@ -139,6 +144,7 @@
         var hatchDate = new Date(`0`);
         hatchDate.setHours(parseInt(hatchTime.split(":")[0]));
         hatchDate.setMinutes(parseInt(hatchTime.split(":")[1]));
+
         var msg = Construct(document.getElementById("location").value, hatchDate, parseInt(document.getElementById("startTime").value));
         if (!msg) {
             alert("Invalid location");
@@ -148,23 +154,27 @@
         document.getElementById("result").style.height = document.getElementById("result").scrollHeight + "px";
     }
 
-    function checkTime(i) {
-        if (i < 10) {
-            i = "0" + i;
-        }
-        return i;
+    function fixTime(i) {
+        var d = i,
+        h = i.getHours(),
+        m = i.getMinutes();
+    if (h < 10) h = '0' + h;
+    if (m < 10) m = '0' + m;
+        return `${h}.${m}`;
     }
 
     function Construct(location, raidAvailableTime, addMin) {
-        if (RaidLocations.every(s => !s.name.toLowerCase().includes(location.toLowerCase()) && !s.location.toLowerCase().includes(location.toLowerCase())))
+        if (RaidLocations.filter(s => s.name == location).length <= 0)
             return false;
-        var targetLocation = RaidLocations.find(s => s.name.toLowerCase().includes(location.toLowerCase()) || s.location.toLowerCase().includes(location.toLowerCase()));
+
+        var targetLocation = RaidLocations.find(s => s.name == location);
         var endTime = new Date(raidAvailableTime.getTime() + 45 * 60000);
         var startTime = new Date(raidAvailableTime.getTime() + addMin * 60000);
+
         var message = `*${CurrentRaidBoss}* _${targetLocation.name}_${targetLocation.exraid == true ? " *EX RAID LOCATIE*" : ""}
 *Locatie* ${targetLocation.location}
-*Raidboss Available* ${checkTime(raidAvailableTime.getHours())}.${checkTime(raidAvailableTime.getMinutes())} - ${checkTime(endTime.getHours())}.${checkTime(endTime.getMinutes())}
-*Start* ${checkTime(startTime.getHours())}.${checkTime(startTime.getMinutes())}
+*Raidboss Available* ${fixTime(raidAvailableTime)} - ${fixTime(endTime)}
+*Start* ${fixTime(startTime)}
 *Voor Deelname* ${targetLocation.reaction}
 *Deelnemers*`;
         return message;
@@ -237,7 +247,7 @@
         {
             name: "Weyevliet Mural",
             location: "Weyevlietpad",
-            reaction: "🐝",
+            reaction: "👣",
             exraid: false
         },
         {
@@ -255,7 +265,7 @@
         {
             name: "Straat Mozaïek",
             location: "Gravestraat",
-            reaction: "👩🏻‍🎨",
+            reaction: "👺",
             exraid: false
         },
         {
@@ -273,7 +283,7 @@
         {
             name: "Graffiti",
             location: "President Rooseveltlaan",
-            reaction: "👩🏻‍🎨",
+            reaction: "🎃",
             exraid: false
         },
         {
@@ -345,13 +355,13 @@
         {
             name: "Statue Frans Naerebout",
             location: "Boule",
-            reaction: "👩🏻‍🎨", //DUPLICATE
+            reaction: "🧦", //DUPLICATE
             exraid: false
         },
         {
             name: "Adventkerk",
             location: "Kerklaan, West-Souburg",
-            reaction: "",
+            reaction: "🧢",
             exraid: false
         },
         {

@@ -22,7 +22,8 @@
 
     #hatchTime,
     #startTime,
-    #result {
+    #result,
+    #currentRaidboss {
         width: 100%;
         font-size: 16px;
         border: 1px solid #ddd;
@@ -53,6 +54,10 @@
 
 <body>
     <div>
+        <label for="currentRaidboss">Current Raid Boss: </label>
+        <input oninput="setRaidboss()" type="text" id="currentRaidboss" />
+    </div>
+    <div>
         <label for="locations">Location: </label>
         <input list="locations" id="location" onclick="reset()">
         <datalist id="locations">
@@ -67,7 +72,7 @@
         <input type="number" id="startTime" value="35" max="1000" />
     </div>
     <div>
-        <button id="CreateMessage" onclick="CreateMessage()">Do Magic</button>
+        <button id="createMessage" onclick="CreateMessage()">Do Magic</button>
     </div>
     <div>
         <label for="result">Result: </label>
@@ -84,7 +89,27 @@
 </html>
 
 <script>
+const version = "0.1.1";
+if (!localStorage.getItem("currentVersion"))
+{
+    localStorage.setItem("currentVersion", version);
+}
+else if (localStorage.getItem("currentVersion") != version)
+{
+    localStorage.removeItem("currentRaidBoss");
+    localStorage.setItem("currentVersion", version);
+}
+</script>
+
+<script>
     var CurrentRaidBoss = "Giratina Altered Forme";
+    if (!localStorage.getItem("currentRaidBoss")) {
+        localStorage.setItem("currentRaidBoss", CurrentRaidBoss);
+        document.getElementById("currentRaidboss").value = localStorage.getItem("currentRaidBoss");
+    }
+    else {
+        document.getElementById("currentRaidboss").value = localStorage.getItem("currentRaidBoss");
+    }
 
     var d = new Date(),
         h = d.getHours(),
@@ -95,15 +120,16 @@
 </script>
 
 <script>
-
-    function share()
-    {
-        if (document.getElementById("result").value != "")
-        location.href="whatsapp://send?text="+encodeURIComponent(document.getElementById("result").value);
+    function setRaidboss() {
+        localStorage.setItem("currentRaidBoss", document.getElementById("currentRaidboss").value);
     }
 
-    function reset()
-    {
+    function share() {
+        if (document.getElementById("result").value != "")
+            location.href = "whatsapp://send?text=" + encodeURIComponent(document.getElementById("result").value);
+    }
+
+    function reset() {
         document.getElementById("location").value = "";
     }
 
@@ -168,10 +194,10 @@
 
     function fixTime(i) {
         var d = i,
-        h = i.getHours(),
-        m = i.getMinutes();
-    if (h < 10) h = '0' + h;
-    if (m < 10) m = '0' + m;
+            h = i.getHours(),
+            m = i.getMinutes();
+        if (h < 10) h = '0' + h;
+        if (m < 10) m = '0' + m;
         return `${h}.${m}`;
     }
 
@@ -183,7 +209,7 @@
         var endTime = new Date(raidAvailableTime.getTime() + 45 * 60000);
         var startTime = new Date(raidAvailableTime.getTime() + addMin * 60000);
 
-        var message = `*${CurrentRaidBoss}* _${targetLocation.name}_${targetLocation.exraid == true ? " *EX RAID LOCATIE*" : ""}
+        var message = `*${localStorage.getItem("currentRaidBoss")}* _${targetLocation.name}_${targetLocation.exraid == true ? " *EX RAID LOCATIE*" : ""}
 *Locatie* ${targetLocation.location}
 *Raidboss Available* ${fixTime(raidAvailableTime)} - ${fixTime(endTime)}
 *Start* ${fixTime(startTime)}

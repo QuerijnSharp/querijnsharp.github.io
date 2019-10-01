@@ -13,7 +13,7 @@ var RaidLocations = [{
     name: "Graffiti skatebaan Bossenburgh",
     location: "Bossenburgh, bij CSW en Scheldemond",
     reaction: "👩🏻‍🎨",
-    exraid: false
+    exraid: true
 }, {
     name: "Apostolische gemeenschap",
     location: "Lammerenburg/Rosenburg",

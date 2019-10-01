@@ -27,7 +27,7 @@
     </div>
     <div>
         <label for="number">Minutes to start after egg hatch: </label>
-        <input type="number" id="startTime" value="35" max="1000" />
+        <input type="number" id="startTime" value="35" max="45" />
     </div>
     <div>
         <button id="createMessage" onclick="CreateMessage()">Do Magic</button>
@@ -138,7 +138,7 @@
 
         var msg = Construct(document.getElementById("location").value, hatchDate, parseInt(document.getElementById("startTime").value));
         if (!msg) {
-            alert("Invalid location");
+            alert("Invalid location or invalid start time");
             return;
         }
         document.getElementById("result").value = msg
@@ -162,6 +162,9 @@
         var endTime = new Date(raidAvailableTime.getTime() + 45 * 60000);
         var startTime = new Date(raidAvailableTime.getTime() + addMin * 60000);
 
+        if (startTime > endTime) {
+            return false;
+        }
         var message = `*${localStorage.getItem("currentRaidBoss")}* _${targetLocation.name}_${targetLocation.exraid == true ? " *EX RAID LOCATIE*" : ""}
 *Locatie* ${targetLocation.location}
 *Raidboss Available* ${fixTime(raidAvailableTime)} - ${fixTime(endTime)}

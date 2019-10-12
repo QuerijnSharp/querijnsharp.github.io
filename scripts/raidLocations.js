@@ -38,7 +38,7 @@ var RaidLocations = [{
     name: "Playground Lammerenburg",
     location: "Strandwal",
     reaction: "▶",
-    exraid: false
+    exraid: true
 }, {
     name: "Mural House",
     location: "Kanariesprenk/Papegaaienburg",
@@ -93,7 +93,7 @@ var RaidLocations = [{
     name: "Nieuw Apostolische Kerk",
     location: "West Souburg",
     reaction: "⛪",
-    exraid: false
+    exraid: true
 }, {
     name: "Kruis Kerk de Schaapskooi ",
     location: "Winkelcentrum Papegaaienburg",
@@ -118,7 +118,7 @@ var RaidLocations = [{
     name: "Papegaai in Glas",
     location: "Papegaaienburg",
     reaction: "🦜",
-    exraid: false
+    exraid: true
 }, {
     name: "Speelplastiek",
     location: "Aletta Jacobslaan",
@@ -168,7 +168,7 @@ var RaidLocations = [{
     name: "Boeiend/Bioscoop",
     location: "Spuikomweg",
     reaction: "🎞",
-    exraid: false
+    exraid: true //Niet zeker
 }, {
     name: "Fysiotherapie",
     location: "Burgemeester van Woelderenlaan",

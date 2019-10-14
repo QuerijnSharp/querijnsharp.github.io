@@ -168,7 +168,7 @@ var RaidLocations = [{
     name: "Boeiend/Bioscoop",
     location: "Spuikomweg",
     reaction: "🎞",
-    exraid: true //Niet zeker
+    exraid: false //Niet zeker
 }, {
     name: "Fysiotherapie",
     location: "Burgemeester van Woelderenlaan",
@@ -215,15 +215,15 @@ var RaidLocations = [{
     reaction: "🧱",
     exraid: false
 }, {
-    name: "Ergens Ben Ik Anders Ben Ik Ne / Arsenaal toren",
+    name: "Ergens Ben Ik Anders Ben Ik Nergens / Arsenaal toren",
     location: "Arsenaal",
     reaction: "🛠",
     exraid: false
 }, {
-    name: "Oranjenolen Anno 1699",
+    name: "Oranjemolen Anno 1699",
     location: "Oranjedijk",
     reaction: "🔨",
-    exraid: false
+    exraid: true
 }, {
     name: "Biber (Submarine) 313",
     location: "Oranjedijk",
@@ -251,7 +251,7 @@ var RaidLocations = [{
     exraid: false
 }, {
     name: "Koopvaardij",
-    location: "Nollehoofd / President Rooseveltlaan",
+    location: "Nollehoofd / President Rooseveltlaan / Boule",
     reaction: "📷",
     exraid: false
 }, {
@@ -294,4 +294,94 @@ var RaidLocations = [{
     location: "Albert van dalsumlaan",
     reaction: "📍",
     exraid: true
+}, {
+    name: "Kreatief Kozijn",
+    location: "President Rooseveltlaan",
+    reaction: "🍕",
+    exraid: false
+}, {
+    name: "Opdat het nageslacht het wete",
+    location: "Marnixplein",
+    reaction: "🦴",
+    exraid: false
+}, {
+    name: "Karel IV",
+    location: "Karel keizershof west souburg",
+    reaction: "🥝",
+    exraid: false
+}, {
+    name: "Trapveld",
+    location: "Westerzicht",
+    reaction: "🍇",
+    exraid: false
+}, {
+    name: "'t Puntje",
+    location: "Pietheinkade",
+    reaction: "🧂",
+    exraid: false
+}, {
+    name: "Zonnewijzer",
+    location: "Prins Hendrikweg",
+    reaction: "🥢",
+    exraid: false
+}, {
+    name: "Tobruk and Munitionbunker",
+    location: "Nollebos",
+    reaction: "🍴",
+    exraid: true
+}, {
+    name: "Trap met Scheppen",
+    location: "Sloeweg/Koudekerkseweg",
+    reaction: "🍺",
+    exraid: true
+}, {
+    name: "4 Faces",
+    location: "V. Dishoeckstraat",
+    reaction: "🍼",
+    exraid: false
+}, {
+    name: "Route Middelburg-Vlissingen",
+    location: "jaagpad/draaibrug souburg",
+    reaction: "🥜",
+    exraid: false
+}, {
+    name: "keersluisbrug Vlissingen",
+    location: "Vlakbij HZ",
+    reaction: "🍪",
+    exraid: false
+}, {
+    name: "Molen de pere",
+    location: "Kanaalstraat oos-souburg",
+    reaction: "🍫",
+    exraid: false
+}, {
+    name: "Scheiding der stad Vlissingen",
+    location: "Fietspad nieuwe Vlissingse weg/westerzicht",
+    reaction: "🍮",
+    exraid: true
+}, {
+    name: "De Ronde Ondergang",
+    location: "HZ",
+    reaction: "🥧",
+    exraid: false
+}, {
+    name: "Monument generaal",
+    location: "Oostsouburgseweg",
+    reaction: "🎄",
+    exraid: false
+}, {
+    name: "West Souburg",
+    location: "Nieuwe Vlissingseweg",
+    reaction: "🎋",
+    exraid: false
+}, {
+    name: "Watergebouw 1872",
+    location: "Naast HZ",
+    reaction: "🍂",
+    exraid: false
+}, {
+    name: "Big A",
+    location: "Naast HZ",
+    reaction: "🌾",
+    exraid: false
 }];

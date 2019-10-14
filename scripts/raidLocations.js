@@ -184,4 +184,114 @@ var RaidLocations = [{
     location: "Westerzicht",
     reaction: "🕸",
     exraid: false
+}, {
+    name: "Scheldestraat Mural",
+    location: "Scheldestraat",
+    reaction: "💈",
+    exraid: false
+}, {
+    name: "Plaatwerkerij",
+    location: "Hellingbaan",
+    reaction: "🛡",
+    exraid: false
+}, {
+    name: "Windvaan",
+    location: "Walstraat / Coosje Buskenstraat",
+    reaction: "🧸",
+    exraid: false
+}, {
+    name: "De Gevangentoren",
+    location: "Boulevard de Ruyter",
+    reaction: "📖",
+    exraid: false
+}, {
+    name: "Beursgebouw",
+    location: "Keizersbolwerk / Beursplein",
+    reaction: "📐",
+    exraid: false
+}, {
+    name: "Dichter in het park",
+    location: "Hofje de Pauw / Beurstraat",
+    reaction: "🧱",
+    exraid: false
+}, {
+    name: "Ergens Ben Ik Anders Ben Ik Ne / Arsenaal toren",
+    location: "Arsenaal",
+    reaction: "🛠",
+    exraid: false
+}, {
+    name: "Oranjenolen Anno 1699",
+    location: "Oranjedijk",
+    reaction: "🔨",
+    exraid: false
+}, {
+    name: "Biber (Submarine) 313",
+    location: "Oranjedijk",
+    reaction: "💎",
+    exraid: true
+}, {
+    name: "Holle Beer Build",
+    location: "Commandoweg",
+    reaction: "📺",
+    exraid: true
+}, {
+    name: "Brandingssculptuur \"Eruption\"",
+    location: "Boulevard Bankert",
+    reaction: "📟",
+    exraid: false
+}, {
+    name: "Mosaic Nordsea Fish",
+    location: "Boulevard Evertsen",
+    reaction: "📞",
+    exraid: false
+}, {
+    name: "Kerk Pinkster Gemeente",
+    location: "Vrijdomweg",
+    reaction: "📹",
+    exraid: false
+}, {
+    name: "Koopvaardij",
+    location: "Nollehoofd / President Rooseveltlaan",
+    reaction: "📷",
+    exraid: false
+}, {
+    name: "David Smithson | Tower of impeccable notes",
+    location: "Sloeweg / Sportpark Bonedijke",
+    reaction: "📼",
+    exraid: true
+}, {
+    name: "Leeuwenkop",
+    location: "Falckstraat",
+    reaction: "💿",
+    exraid: false
+}, {
+    name: "Regenboogflat Groen",
+    location: "Alexander Gogelweg",
+    reaction: "💽",
+    exraid: false
+}, {
+    name: "Het Anker",
+    location: "Jumbo Pauwenburg",
+    reaction: "🖱",
+    exraid: false
+}, {
+    name: "Vlietberg",
+    location: "Mozartlaan Pauwenburg",
+    reaction: "🖥",
+    exraid: false
+}, {
+    name: "Crazy Blocks",
+    location: "Offenbachlaan",
+    reaction: "📱",
+    exraid: false
+}, {
+    name: "De Scheldestad",
+    location: "Gebrandystraat",
+    reaction: "⌚",
+    exraid: false
+}, {
+    name: "Bollen Langs De Weg",
+    location: "Albert van dalsumlaan",
+    reaction: "📍",
+    exraid: true
 }];

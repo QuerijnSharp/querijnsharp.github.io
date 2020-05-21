@@ -1,5 +1,5 @@
-const Version = "0.1.3";
-const CurrentRaidBoss = "Armored Mewtwo";
+const Version = "0.1.4";
+const CurrentRaidBoss = "Terrakion";
 
 function Init() {
     if (!localStorage.getItem("currentVersion")) {
@@ -80,7 +80,7 @@ function copy() {
     document.execCommand('copy');
 }
 
-function CreateMessage() {
+function createMessage() {
     if (document.getElementById("startTime").value == "" || document.getElementById("hatchTime").value == "") {
         return;
     } else if (document.getElementById("location").value == "") {
@@ -92,7 +92,7 @@ function CreateMessage() {
     hatchDate.setHours(parseInt(hatchTime.split(":")[0]));
     hatchDate.setMinutes(parseInt(hatchTime.split(":")[1]));
 
-    var msg = Construct(document.getElementById("location").value, hatchDate, parseInt(document.getElementById("startTime").value));
+    var msg = construct(document.getElementById("location").value, hatchDate, parseInt(document.getElementById("startTime").value));
     if (!msg) {
         alert("Invalid location or invalid start time");
         return;
@@ -109,7 +109,7 @@ function fixTime(i) {
     return `${h}.${m}`;
 }
 
-function Construct(location, raidAvailableTime, addMin) {
+function construct(location, raidAvailableTime, addMin) {
     if (RaidLocations.filter(s => s.name == location).length <= 0)
         return false;
 

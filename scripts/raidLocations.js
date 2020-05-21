@@ -384,4 +384,14 @@ var RaidLocations = [{
     location: "Naast HZ",
     reaction: "🌾",
     exraid: false
+}, {
+    name: "Trapveldje van der Helstlaan",
+    location: "van der Helstlaan",
+    reaction: "🔻",
+    exraid: false
+}, {
+    name: "Rode Wipwap",
+    location: "Breitnerlaan",
+    reaction: "🔺",
+    exraid: false
 }];
